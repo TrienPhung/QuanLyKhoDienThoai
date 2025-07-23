@@ -1,0 +1,149 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Model.DAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import Utils.DbConnection;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Model.DTO.KhachHangDTO;
+
+public class KhachHangDAO implements DAOinterface<KhachHangDTO> {
+
+    public static KhachHangDAO getInstance() {
+        return new KhachHangDAO();
+    }
+
+    @Override
+    public int insert(KhachHangDTO t) {
+        int result = 0;
+        try {
+            Connection con = (Connection) DbConnection.getConnection();
+            String sql = "INSERT INTO `khachhang`(`tenkhachhang`, `diachi`,`sdt`, `trangthai`) VALUES (?,?,?,1)";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            //pst.setInt(1, t.getMaKH());
+            pst.setString(1, t.getHoten());
+            pst.setString(2, t.getDiachi());
+            pst.setString(3, t.getSdt());
+            result = pst.executeUpdate();
+            DbConnection.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public int update(KhachHangDTO t) {
+        int result = 0;
+        try {
+            Connection con = (Connection) DbConnection.getConnection();
+            String sql = "UPDATE `khachhang` SET `makh`=?,`tenkhachhang`=?,`diachi`=?,`sdt`=? WHERE makh=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setInt(1, t.getMaKH());
+            pst.setString(2, t.getHoten());
+            pst.setString(3, t.getDiachi());
+            pst.setString(4, t.getSdt());
+            pst.setInt(5, t.getMaKH());
+            
+            result = pst.executeUpdate();
+            DbConnection.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public int delete(String t) {
+        int result = 0;
+        try {
+            Connection con = (Connection) DbConnection.getConnection();
+            String sql = "UPDATE  `khachhang` SET trangthai=0 WHERE `makh` = ?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            result = pst.executeUpdate();
+            DbConnection.closeConnection(con);
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    @Override
+    public ArrayList<KhachHangDTO> selectAll() {
+        ArrayList<KhachHangDTO> result = new ArrayList<KhachHangDTO>();
+        try {
+            Connection con = (Connection) DbConnection.getConnection();
+            String sql = "SELECT * FROM khachhang WHERE trangthai=1";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while(rs.next()){
+                int makh = rs.getInt("makh");
+                String tenkhachhang = rs.getString("tenkhachhang");
+                String diachi = rs.getString("diachi");
+                String sdt = rs.getString("sdt");
+                Date ngaythamgia = rs.getDate("ngaythamgia");
+                KhachHangDTO kh = new KhachHangDTO(makh, tenkhachhang, sdt, diachi,ngaythamgia);
+                result.add(kh);
+            }
+            DbConnection.closeConnection(con);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+    @Override
+    public KhachHangDTO selectById(String t) {
+        KhachHangDTO result = null;
+        try {
+            Connection con = (Connection) DbConnection.getConnection();
+            String sql = "SELECT * FROM khachhang WHERE makh=?";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            pst.setString(1, t);
+            ResultSet rs = (ResultSet) pst.executeQuery();
+            while(rs.next()){
+                int makh = rs.getInt("makh");
+                String tenkhachhang = rs.getString("tenkhachhang");
+                String diachi = rs.getString("diachi");
+                String sdt = rs.getString("sdt");
+                Date ngaythamgia = rs.getDate("ngaythamgia");
+                result = new KhachHangDTO(makh, tenkhachhang, sdt, diachi,ngaythamgia);
+            }
+            DbConnection.closeConnection(con);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+    @Override
+    public int getAutoIncrement() {
+        int result = -1;
+        try {
+            Connection con = (Connection) DbConnection.getConnection();
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlikhohang' AND   TABLE_NAME   = 'khachhang'";
+            PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+            ResultSet rs2 = pst.executeQuery(sql);
+            if (!rs2.isBeforeFirst() ) {
+                System.out.println("No data");
+            } else {
+                while ( rs2.next() ) {
+                    result = rs2.getInt("AUTO_INCREMENT");
+                    
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KhachHangDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+}
