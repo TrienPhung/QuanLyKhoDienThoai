@@ -118,7 +118,7 @@ public class itemTaskbar extends JPanel implements MouseListener {
         lblIcon.setPreferredSize(new Dimension(100, 100));
         lblIcon.setBorder(new EmptyBorder(0, 20, 0, 0));
 
-        lblIcon.setIcon(new FlatSVGIcon("./Images/" + linkIcon));
+        lblIcon.setIcon(new FlatSVGIcon("./Icons/" + linkIcon));
         this.add(lblIcon, BorderLayout.WEST);
 
         JPanel center = new JPanel();

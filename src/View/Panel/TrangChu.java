@@ -104,7 +104,7 @@ public class TrangChu extends JPanel {
     JLabel title, subTit, infoDetail[], objDetail[], objDetail1[], infoIcon[];
     
     String[][] getSt = {
-        {"TÍNH BẢO MẬT", "tinhbaomat_128px.svg", "Ứng tính bảo mật cho các hoạt động quản lý."},
+        {"TÍNH BẢO MẬT", "tinhbaomat_128px.svg", "Ứng dụng tính bảo mật cho các hoạt động quản lý."},
         {"TÍNH CHÍNH XÁC", "tinhchinhxac_128px.svg", "Đảm bảo tính chính xác và độ tin cậy cao của các hoạt động quản lý."},
         {"TÍNH HIỆU QUẢ", "tinhhieuqua_128px.svg", "Có thể dễ dàng xác định được thông tin về từng thiết bị điện thoại một cách nhanh chóng và chính xác."},
         {"TÍNH ỔN ĐỊNH", "tinhondinh_128px.svg", "Hệ thống có khả năng hoạt động ổn định theo thời gian dài và ít xảy ra các lỗi trang lỗi."}

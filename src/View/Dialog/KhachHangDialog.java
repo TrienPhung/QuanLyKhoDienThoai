@@ -144,7 +144,7 @@ public class KhachHangDialog extends JDialog implements MouseListener {
         if (Validation.isEmpty(ten)) {
             JOptionPane.showMessageDialog(this, "Tên khách hàng không được rỗng", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
             return false;
-        } else if (!ten.matches("^[\\p{L}\\s]+$")) {
+        } else if (!ten.matches("^[a-zA-ZÀ-ỹ\\sĐđ]+$")) {
             JOptionPane.showMessageDialog(this, "Tên khách hàng không được chứa ký tự đặc biệt hoặc số", "Cảnh báo !", JOptionPane.WARNING_MESSAGE);
             return false;
         }

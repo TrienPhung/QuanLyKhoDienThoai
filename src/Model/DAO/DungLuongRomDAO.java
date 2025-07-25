@@ -46,7 +46,7 @@ public class DungLuongRomDAO implements DAOinterface<DungLuongRomDTO> {
             String sql = "UPDATE `dungluongrom` SET `kichthuocrom`=? WHERE `madlrom`=?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setInt(1, t.getDungluongrom());
-            pst.setInt(2, t.getDungluongrom());
+            pst.setInt(2, t.getMadungluongrom());
             result = pst.executeUpdate();
             DbConnection.closeConnection(con);
         } catch (SQLException ex) {
@@ -60,7 +60,7 @@ public class DungLuongRomDAO implements DAOinterface<DungLuongRomDTO> {
         int result = 0;
         try {
             Connection con = (Connection) DbConnection.getConnection();
-            String sql = "UPDATE `dungluongrom` SET `trangthai` = 0 WHERE madlrom = ?";
+            String sql = "UPDATE `dungluongrom` SET trangthai = 0 WHERE madlrom = ?";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             pst.setString(1, t);
             result = pst.executeUpdate();
@@ -115,7 +115,7 @@ public class DungLuongRomDAO implements DAOinterface<DungLuongRomDTO> {
         int result = -1;
         try {
             Connection con = (Connection) DbConnection.getConnection();
-            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlikhohang' AND   TABLE_NAME   = 'dungluongrom'";
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlykhohangdienthoai' AND   TABLE_NAME   = 'dungluongrom'";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs2 = pst.executeQuery(sql);
             if (!rs2.isBeforeFirst()) {

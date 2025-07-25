@@ -25,11 +25,11 @@ public class KhuVucKhoDAO implements DAOinterface<KhuVucKhoDTO> {
         int result = 0;
         try {
             Connection con = (Connection) DbConnection.getConnection();
-            String sql = "INSERT INTO `khuvuckho`( `tenkhuvuc`,`ghichu`,`trangthai`) VALUES (?,?,1)";
+            String sql = "INSERT INTO `khuvuckho`(`makhuvuc`, `tenkhuvuc`,`ghichu`,`trangthai`) VALUES (?,?,?,1)";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
-            //pst.setInt(1, t.getMakhuvuc());
-            pst.setString(1, t.getTenkhuvuc());
-            pst.setString(2, t.getGhichu());
+            pst.setInt(1, t.getMakhuvuc());
+            pst.setString(2, t.getTenkhuvuc());
+            pst.setString(3, t.getGhichu());
             result = pst.executeUpdate();
             DbConnection.closeConnection(con);
         } catch (SQLException ex) {
@@ -119,7 +119,7 @@ public class KhuVucKhoDAO implements DAOinterface<KhuVucKhoDTO> {
         int result = -1;
         try {
             Connection con = (Connection) DbConnection.getConnection();
-            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlikhohang' AND   TABLE_NAME   = 'khuvuckho'";
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlykhohangdienthoai' AND   TABLE_NAME   = 'khuvuckho'";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs2 = pst.executeQuery(sql);
             if (!rs2.isBeforeFirst()) {

@@ -27,13 +27,13 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
         int result = 0;
         try {
             Connection con = (Connection) DbConnection.getConnection();
-            String sql = "INSERT INTO `phieunhap`( `thoigian`, `manhacungcap`, `nguoitao`, `tongtien`) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO `phieunhap`(`maphieunhap`, `thoigian`, `manhacungcap`, `nguoitao`, `tongtien`) VALUES (?,?,?,?,?)";
             PreparedStatement pst = con.prepareStatement(sql);
-            //pst.setInt(1, t.getMaphieu());
-            pst.setTimestamp(1, t.getThoigiantao());
-            pst.setInt(2, t.getManhacungcap());
-            pst.setInt(3, t.getManguoitao());
-            pst.setDouble(4, t.getTongTien());
+            pst.setInt(1, t.getMaphieu());
+            pst.setTimestamp(2, t.getThoigiantao());
+            pst.setInt(3, t.getManhacungcap());
+            pst.setInt(4, t.getManguoitao());
+            pst.setDouble(5, t.getTongTien());
             result = pst.executeUpdate();
             DbConnection.closeConnection(con);
         } catch (SQLException ex) {
@@ -207,7 +207,7 @@ public class PhieuNhapDAO implements DAOinterface<PhieuNhapDTO> {
         int result = -1;
         try {
             Connection con = (Connection) DbConnection.getConnection();
-            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlikhohang' AND TABLE_NAME   = 'phieunhap'";
+            String sql = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'quanlykhohangdienthoai' AND TABLE_NAME   = 'phieunhap'";
             PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
             ResultSet rs2 = pst.executeQuery(sql);
             if (!rs2.isBeforeFirst()) {

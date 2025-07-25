@@ -110,6 +110,7 @@ public final class PhanQuyenDialog extends JDialog implements ActionListener {
             }
             case "update" -> {
                 btnUpdateNhomQuyen = new ButtonCustom("Cập nhật nhóm quyền", "success", 14);
+                btnUpdateNhomQuyen.setPreferredSize(new Dimension(180,40));
                 btnUpdateNhomQuyen.addActionListener(this);
                 jpBottom.add(btnUpdateNhomQuyen);
                 initUpdate();
